@@ -20,6 +20,23 @@ class AppTheme {
       backgroundColor: primaryLight,
       foregroundColor: white,
       shape: CircleBorder()
+    ),
+    textTheme: TextTheme(
+      titleLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: .w500,
+        color: black
+      ),
+      titleMedium: TextStyle(
+        fontSize: 16,
+        fontWeight: .w500,
+        color: black
+      ),
+      titleSmall: TextStyle(
+        fontSize: 14,
+        fontWeight: .w400,
+        color: grey
+      )
     )
   );
   static ThemeData darkTheme = ThemeData();
