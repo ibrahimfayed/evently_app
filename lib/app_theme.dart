@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static const Color primaryLight = Color(0xff0E3A99);
-  static const Color darkLight = Color(0xff457AED);
+  static const Color primaryDark = Color(0xff457AED);
   static const Color backgroundLight = Color(0xffF4F7FF);
   static const Color backgroundDark = Color(0xff000F30);
   static const Color white = Color(0xffffffff);
   static const Color offWhite = Color(0xffF0F0F0);
   static const Color black = Color(0xff1C1C1C);
   static const Color grey = Color(0xff686868);
+  static const Color lightGrey = Color(0xffE9EAEB);
 
   static ThemeData lightTheme = ThemeData(
+    primaryColor: primaryLight,
     scaffoldBackgroundColor: backgroundLight,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: white,
@@ -35,6 +37,15 @@ class AppTheme {
         borderSide: BorderSide(color: offWhite),
       ),
     ),
+    listTileTheme: ListTileThemeData(
+      tileColor: white,
+      minTileHeight: 0,
+      shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.circular(16),
+            ),
+            titleTextStyle: TextStyle(fontSize: 16, fontWeight: .w500, color: black)
+      ),
+    
     textTheme: TextTheme(
       titleLarge: TextStyle(fontSize: 20, fontWeight: .w500, color: black),
       titleMedium: TextStyle(fontSize: 16, fontWeight: .w500, color: black),
