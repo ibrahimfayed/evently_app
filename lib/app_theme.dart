@@ -8,7 +8,8 @@ class AppTheme {
   static const Color white = Color(0xffffffff);
   static const Color offWhite = Color(0xffF0F0F0);
   static const Color black = Color(0xff1C1C1C);
-  static const Color grey = Color(0xff686868);
+  static const Color darkGrey = Color(0xff686868);
+  static const Color grey = Color(0xffB9B9B9);
   static const Color lightGrey = Color(0xffE9EAEB);
 
   static ThemeData lightTheme = ThemeData(
@@ -17,7 +18,7 @@ class AppTheme {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: white,
       selectedItemColor: primaryLight,
-      unselectedItemColor: grey,
+      unselectedItemColor: darkGrey,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: primaryLight,
@@ -27,7 +28,7 @@ class AppTheme {
     inputDecorationTheme: InputDecorationThemeData(
       filled: true,
       fillColor: white,
-      hintStyle: TextStyle(fontSize: 14, fontWeight: .w400, color: grey),
+      hintStyle: TextStyle(fontSize: 14, fontWeight: .w400, color: darkGrey),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: offWhite),
@@ -41,15 +42,39 @@ class AppTheme {
       tileColor: white,
       minTileHeight: 0,
       shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.circular(16),
-            ),
-            titleTextStyle: TextStyle(fontSize: 16, fontWeight: .w500, color: black)
+        borderRadius: BorderRadiusGeometry.circular(16),
       ),
-    
+      titleTextStyle: TextStyle(fontSize: 16, fontWeight: .w500, color: black),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: primaryLight,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(16),
+        ),
+        foregroundColor: white,
+        textStyle: TextStyle(fontSize: 20, fontWeight: .w500),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: primaryLight,
+        textStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: .w400,
+          decoration: .underline, 
+          ),
+      ),
+    ),
     textTheme: TextTheme(
+      headlineSmall: TextStyle(
+        fontSize: 24,
+        fontWeight: .w600,
+        color: primaryLight,
+      ),
       titleLarge: TextStyle(fontSize: 20, fontWeight: .w500, color: black),
       titleMedium: TextStyle(fontSize: 16, fontWeight: .w500, color: black),
-      titleSmall: TextStyle(fontSize: 14, fontWeight: .w400, color: grey),
+      titleSmall: TextStyle(fontSize: 14, fontWeight: .w400, color: darkGrey),
     ),
   );
   static ThemeData darkTheme = ThemeData();

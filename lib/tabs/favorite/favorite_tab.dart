@@ -1,4 +1,4 @@
-import 'package:evently_app/widgets/defult_text_form_field.dart';
+import 'package:evently_app/widgets/default_text_form_field.dart';
 import 'package:evently_app/widgets/event_item.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class FavoriteTab extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          DefultTextFormField(
+          DefaultTextFormField(
             hintText: 'Search for event',
             suffixIconImageName: 'search',
             onChanged: (quary) {},
