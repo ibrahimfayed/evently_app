@@ -47,6 +47,15 @@ class AppTheme {
         borderSide: BorderSide(color: red),
       ),
     ),
+    appBarTheme: AppBarThemeData(
+      backgroundColor: backgroundLight,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        fontSize: 18,
+        fontWeight: .w500,
+        color: black
+      )
+    ),
     listTileTheme: ListTileThemeData(
       tileColor: white,
       minTileHeight: 0,

@@ -10,6 +10,7 @@ class DefaultTextFormField extends StatefulWidget {
   String? prefixIconImageName;
   String? suffixIconImageName;
   bool isPassword;
+  int maxLines;
 
   DefaultTextFormField({
     required this.hintText,
@@ -19,6 +20,7 @@ class DefaultTextFormField extends StatefulWidget {
     this.prefixIconImageName,
     this.suffixIconImageName,
     this.isPassword = false,
+    this.maxLines = 1
   });
 
   @override
@@ -69,6 +71,7 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
       onTapOutside: (_) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
+      maxLines: widget.maxLines ,
     );
   }
 }
