@@ -2,9 +2,15 @@ import 'package:evently_app/models/category_model.dart';
 import 'package:evently_app/tabs/home/tab_item.dart';
 import 'package:flutter/material.dart';
 
-class HomeHeader extends StatelessWidget {
+class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
 
+  @override
+  State<HomeHeader> createState() => _HomeHeaderState();
+}
+
+class _HomeHeaderState extends State<HomeHeader> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -28,18 +34,25 @@ class HomeHeader extends StatelessWidget {
                 labelPadding: EdgeInsets.only(right: 8),
                 tabs: [
                   TabItem(
-                    isSelected: true,
+                    isSelected: currentIndex == 0,
                     label: 'All',
                     icon: Icons.category_outlined,
                   ),
                   ...CategoryModel.categories.map(
                     (category) => TabItem(
-                      isSelected: false,
+                      isSelected:
+                          currentIndex ==
+                          CategoryModel.categories.indexOf(category) + 1,
                       icon: category.icon,
                       label: category.name,
                     ),
                   ),
                 ],
+                onTap: (index) {
+                  if (currentIndex == index) {return;}//تحسين زيادة عشان لما يضغط علي نفس العنصر أكتر من مرة ميبنيش الشاشة كلها تاني علي الفاضي
+                  currentIndex = index;
+                  setState(() {});
+                },
               ),
             ),
           ),

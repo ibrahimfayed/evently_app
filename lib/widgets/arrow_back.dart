@@ -8,7 +8,9 @@ class ArrowBack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: (){},
+      onPressed: (){
+        Navigator.of(context).pop();
+      },
       icon: Container(
         margin: EdgeInsets.only(left: 16),
         padding: EdgeInsets.all(4),
