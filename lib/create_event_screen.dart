@@ -67,7 +67,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 tabAlignment: .start,
                 padding: EdgeInsets.only(left: 16),
                 onTap: (index) {
-                  currentIndex == index;
+                  currentIndex = index;
                   selectedCategory = CategoryModel.categories[currentIndex];
                   setState(() {});
                 },
