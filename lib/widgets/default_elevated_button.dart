@@ -12,7 +12,7 @@ class DefaultElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(label),
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(MediaQuery.sizeOf(context).width, 48)
+        fixedSize: Size(MediaQuery.sizeOf(context).width, 48),
       ),
       );
   }
