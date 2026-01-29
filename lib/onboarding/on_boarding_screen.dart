@@ -9,6 +9,7 @@ import 'package:evently_app/onboarding/skip_button.dart';
 import 'package:evently_app/onboarding/third_screen.dart';
 import 'package:evently_app/widgets/default_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   static const String routeName = '/onboarding';
@@ -73,7 +74,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
               DefaultElevatedButton(
                 label: getButtonLabel(),
-                onPressed: () {
+                onPressed: () async{
+                  final prefs =await SharedPreferences.getInstance();
+                  prefs.setBool('onboarding', true);
+                  if (!mounted)return;
                   if (index == 3) {
                     Navigator.of(
                       context,

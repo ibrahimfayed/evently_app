@@ -1,6 +1,7 @@
 import 'package:evently_app/models/category_model.dart';
 import 'package:evently_app/tabs/home/tab_item.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
@@ -21,7 +22,14 @@ class _HomeHeaderState extends State<HomeHeader> {
         children: [
           Text('Welcome Back ✨', style: textTheme.titleSmall),
           SizedBox(height: 4),
-          Text('John Safwat', style: textTheme.titleLarge),
+          // InkWell(
+          //   onTap: () async{
+          //     final prefs = await SharedPreferences.getInstance();
+          //     prefs.setBool('onboarding', false);
+          //   },
+          //   child: 
+            Text('John Safwat', style: textTheme.titleLarge),
+            //),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
             child: DefaultTabController(

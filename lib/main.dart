@@ -10,17 +10,24 @@ import 'package:evently_app/onboarding/second_screen.dart';
 import 'package:evently_app/onboarding/third_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future <void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  final prefs=await SharedPreferences.getInstance();
+  final onBoarding = prefs.getBool('onboarding')??false;
   await Firebase.initializeApp();
-  runApp(const EventlyApp());
+  runApp( EventlyApp(
+    onBoarding: onBoarding,
+  ));
 }
 
 class EventlyApp extends StatelessWidget {
-  const EventlyApp({super.key});
 
-  @override
+final bool onBoarding;
+EventlyApp({this.onBoarding = false});
+
+  @override  
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -31,7 +38,7 @@ class EventlyApp extends StatelessWidget {
         CreateEventScreen.routeName:(_)=>CreateEventScreen(),
         OnBoardingScreen.routeName:(_)=>OnBoardingScreen(),
       },
-      initialRoute: OnBoardingScreen.routeName,
+      initialRoute:onBoarding ? HomeScreen.routeName : OnBoardingScreen.routeName,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
