@@ -1,4 +1,5 @@
 import 'package:evently_app/models/category_model.dart';
+import 'package:evently_app/models/event_model.dart';
 import 'package:evently_app/tabs/home/tab_item.dart';
 import 'package:evently_app/widgets/arrow_back.dart';
 import 'package:evently_app/widgets/default_elevated_button.dart';
@@ -39,9 +40,11 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             child: ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(16),
               child: Image.asset(
-                'assets/images/${selectedCategory.imageName}.png',height: MediaQuery.sizeOf(context).height *0.23,
-              
-              width: double.infinity,),
+                'assets/images/${selectedCategory.imageName}.png',
+                height: MediaQuery.sizeOf(context).height * 0.23,
+
+                width: double.infinity,
+              ),
             ),
           ),
           Padding(
@@ -194,6 +197,23 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   }
 
   void createEvent() {
-    if (formKey.currentState!.validate()) {}
+    if (formKey.currentState!.validate() &&
+        selectedDate != null &&
+        selectedTime != null) {
+          DateTime dateTime = DateTime(
+            selectedDate!.year,
+            selectedDate!.month,
+            selectedDate!.day,
+            selectedTime!.hour,
+            selectedTime!.minute
+          );
+          EventModel event = EventModel(
+            category: selectedCategory,
+            title: titleController.text,
+            description: descriptionController.text,
+            dateTime: dateTime);
+            event.toJson();
+        }
+        
   }
 }
