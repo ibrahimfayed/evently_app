@@ -1,13 +1,17 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/models/language_model.dart';
+import 'package:evently_app/models/user_model.dart';
+import 'package:evently_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    UserModel currentUser = Provider.of<UserProvider>(context).currentUser!;
     TextTheme textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -19,10 +23,10 @@ class ProfileTab extends StatelessWidget {
           ),
           SizedBox(height: 16),
           Text(
-            'John Safwat',
+            currentUser.name,
             style: textTheme.titleLarge!.copyWith(fontWeight: .w600),
           ),
-          Text('johnsafwat.route@gmail.com', style: textTheme.titleSmall),
+          Text(currentUser.email, style: textTheme.titleSmall),
           SizedBox(height: 32),
           SwitchListTile(
             value: false,

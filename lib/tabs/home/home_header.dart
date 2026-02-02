@@ -1,7 +1,9 @@
 import 'package:evently_app/models/category_model.dart';
+import 'package:evently_app/models/user_model.dart';
+import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/tabs/home/tab_item.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
@@ -14,7 +16,9 @@ class _HomeHeaderState extends State<HomeHeader> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    UserModel currentUser = Provider.of<UserProvider>(context).currentUser!;
     TextTheme textTheme = Theme.of(context).textTheme;
+    
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Column(
@@ -28,7 +32,7 @@ class _HomeHeaderState extends State<HomeHeader> {
           //     prefs.setBool('onboarding', false);
           //   },
           //   child: 
-            Text('John Safwat', style: textTheme.titleLarge),
+            Text(currentUser.name, style: textTheme.titleLarge),
             //),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
