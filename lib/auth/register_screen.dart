@@ -1,6 +1,9 @@
+import 'package:evently_app/auth/login_screen.dart';
+import 'package:evently_app/firebase_service.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/widgets/default_elevated_button.dart';
 import 'package:evently_app/widgets/default_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -31,7 +34,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 SizedBox(height: 24),
                 Center(
-                  child: Image.asset('assets/images/splash_logo.png', height: 27),
+                  child: Image.asset(
+                    'assets/images/splash_logo.png',
+                    height: 27,
+                  ),
                 ),
                 SizedBox(height: 47),
                 Text('Create your account', style: textTheme.headlineSmall),
@@ -78,12 +84,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Row(
                   mainAxisAlignment: .center,
                   children: [
-                    Text('Already have an account?', style: textTheme.titleSmall),
+                    Text(
+                      'Already have an account?',
+                      style: textTheme.titleSmall,
+                    ),
                     TextButton(
                       onPressed: () {
                         Navigator.of(
                           context,
-                        ).pushReplacementNamed(RegisterScreen.routeName);
+                        ).pushReplacementNamed(LoginScreen.routeName);
                       },
                       child: Text('Login'),
                     ),
@@ -98,9 +107,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void register() {
-    if (formKey.currentState!.validate()){
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+    if (formKey.currentState!.validate()) {
+      FirebaseService.register(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      ).then((user){
+        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      });
     }
-    
   }
 }

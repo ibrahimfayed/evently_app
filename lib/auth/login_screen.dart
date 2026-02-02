@@ -1,3 +1,4 @@
+import 'package:evently_app/firebase_service.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/widgets/default_elevated_button.dart';
 import 'package:evently_app/widgets/default_text_form_field.dart';
@@ -91,7 +92,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void login() {
     if (formKey.currentState!.validate()) {
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      FirebaseService.login(
+        email: emailController.text,
+        password: passwordController.text,
+      ).then((user) {
+        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      });
     }
   }
 }

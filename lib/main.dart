@@ -38,7 +38,7 @@ EventlyApp({this.onBoarding = false});
         CreateEventScreen.routeName:(_)=>CreateEventScreen(),
         OnBoardingScreen.routeName:(_)=>OnBoardingScreen(),
       },
-      initialRoute:onBoarding ? HomeScreen.routeName : OnBoardingScreen.routeName,
+      initialRoute:onBoarding ? RegisterScreen.routeName : OnBoardingScreen.routeName,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
