@@ -59,6 +59,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                 onTap: (index) {
                   if (currentIndex == index) {return;}//تحسين زيادة عشان لما يضغط علي نفس العنصر أكتر من مرة ميبنيش الشاشة كلها تاني علي الفاضي
                   currentIndex = index;
+                  CategoryModel selectedCategory = CategoryModel.categories[index - 1];
                   setState(() {});
                 },
               ),
