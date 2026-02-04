@@ -1,5 +1,6 @@
 import 'package:evently_app/models/category_model.dart';
 import 'package:evently_app/models/user_model.dart';
+import 'package:evently_app/providers/events_provider.dart';
 import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/tabs/home/tab_item.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,13 @@ class _HomeHeaderState extends State<HomeHeader> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    EventsProvider eventsProvider = Provider.of<EventsProvider>(
+      context,
+      listen: false,
+    );
     UserModel currentUser = Provider.of<UserProvider>(context).currentUser!;
     TextTheme textTheme = Theme.of(context).textTheme;
-    
+
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Column(
@@ -31,9 +36,9 @@ class _HomeHeaderState extends State<HomeHeader> {
           //     final prefs = await SharedPreferences.getInstance();
           //     prefs.setBool('onboarding', false);
           //   },
-          //   child: 
-            Text(currentUser.name, style: textTheme.titleLarge),
-            //),
+          //   child:
+          Text(currentUser.name, style: textTheme.titleLarge),
+          //),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24),
             child: DefaultTabController(
@@ -61,9 +66,14 @@ class _HomeHeaderState extends State<HomeHeader> {
                   ),
                 ],
                 onTap: (index) {
-                  if (currentIndex == index) {return;}//تحسين زيادة عشان لما يضغط علي نفس العنصر أكتر من مرة ميبنيش الشاشة كلها تاني علي الفاضي
+                  if (currentIndex == index) {
+                    return;
+                  } //تحسين زيادة عشان لما يضغط علي نفس العنصر أكتر من مرة ميبنيش الشاشة كلها تاني علي الفاضي
                   currentIndex = index;
-                  CategoryModel selectedCategory = CategoryModel.categories[index - 1];
+                  CategoryModel? selectedCategory = index == 0
+                      ? null
+                      : CategoryModel.categories[index - 1];
+                  eventsProvider.filterEvents(selectedCategory);
                   setState(() {});
                 },
               ),

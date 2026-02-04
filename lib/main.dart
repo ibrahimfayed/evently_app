@@ -4,6 +4,7 @@ import 'package:evently_app/auth/register_screen.dart';
 import 'package:evently_app/create_event_screen.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/onboarding/on_boarding_screen.dart';
+import 'package:evently_app/providers/events_provider.dart';
 import 'package:evently_app/providers/user_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,11 @@ Future<void> main() async {
   final onBoarding = prefs.getBool('onboarding') ?? false;
   await Firebase.initializeApp();
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => UserProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => EventsProvider()..getEvents()),
+      ],
       child: EventlyApp(onBoarding: onBoarding),
     ),
   );
@@ -39,7 +43,7 @@ class EventlyApp extends StatelessWidget {
         OnBoardingScreen.routeName: (_) => OnBoardingScreen(),
       },
       initialRoute: onBoarding
-          ? RegisterScreen.routeName
+          ? LoginScreen.routeName
           : OnBoardingScreen.routeName,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
