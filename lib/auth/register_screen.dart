@@ -2,6 +2,7 @@ import 'package:evently_app/auth/login_screen.dart';
 import 'package:evently_app/firebase_service.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/providers/user_provider.dart';
+import 'package:evently_app/ui_utils.dart';
 import 'package:evently_app/widgets/default_elevated_button.dart';
 import 'package:evently_app/widgets/default_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -114,9 +115,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
         name: nameController.text,
         email: emailController.text,
         password: passwordController.text,
-      ).then((user){
-        Provider.of<UserProvider>(context,listen: false).updateCurrentUser(user);
+      ).then((user) {
+        Provider.of<UserProvider>(
+          context,
+          listen: false,
+        ).updateCurrentUser(user);
         Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      }).catchError((error){
+        String? errorMessage;
+        if (error is FirebaseAuthException) {
+          errorMessage = error.message;         
+        }
+        UIUtils.showErrorMessage(errorMessage);
       });
     }
   }

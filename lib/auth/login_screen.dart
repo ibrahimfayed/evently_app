@@ -1,8 +1,11 @@
+import 'package:evently_app/auth/register_screen.dart';
 import 'package:evently_app/firebase_service.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/providers/user_provider.dart';
+import 'package:evently_app/ui_utils.dart';
 import 'package:evently_app/widgets/default_elevated_button.dart';
 import 'package:evently_app/widgets/default_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -78,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         Navigator.of(
                           context,
-                        ).pushReplacementNamed(LoginScreen.routeName);
+                        ).pushReplacementNamed(RegisterScreen.routeName);
                       },
                       child: Text('Signup'),
                     ),
@@ -100,6 +103,12 @@ class _LoginScreenState extends State<LoginScreen> {
       ).then((user) {
         Provider.of<UserProvider>(context,listen: false).updateCurrentUser(user);
         Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+      }).catchError((error){
+        String? errorMessage;
+        if (error is FirebaseAuthException) {
+          errorMessage = error.message;         
+        }
+        UIUtils.showErrorMessage(errorMessage);
       });
     }
   }
