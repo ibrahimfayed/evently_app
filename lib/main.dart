@@ -5,6 +5,7 @@ import 'package:evently_app/create_event_screen.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/onboarding/on_boarding_screen.dart';
 import 'package:evently_app/providers/events_provider.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/user_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => EventsProvider()..getEvents()),
+        ChangeNotifierProvider(create: (_) => SettingsProvider()),
       ],
       child: EventlyApp(onBoarding: onBoarding),
     ),
@@ -33,6 +35,7 @@ class EventlyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
@@ -47,7 +50,7 @@ class EventlyApp extends StatelessWidget {
           : OnBoardingScreen.routeName,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: settingsProvider.themeMode,
     );
   }
 }

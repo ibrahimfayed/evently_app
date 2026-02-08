@@ -13,6 +13,8 @@ class AppTheme {
   static const Color lightGrey = Color(0xffE9EAEB);
   static const Color red = Color(0xffFF3232);
   static const Color gereen = Colors.green;
+  static const Color navy = Color(0xff001440);
+  static const Color borderDark = Color(0xff002D8F);
 
   static ThemeData lightTheme = ThemeData(
     primaryColor: primaryLight,
@@ -33,11 +35,11 @@ class AppTheme {
       hintStyle: TextStyle(fontSize: 14, fontWeight: .w400, color: darkGrey),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: offWhite),
+        borderSide: BorderSide(color: borderDark),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: offWhite),
+        borderSide: BorderSide(color: borderDark),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
@@ -51,11 +53,7 @@ class AppTheme {
     appBarTheme: AppBarThemeData(
       backgroundColor: backgroundLight,
       centerTitle: true,
-      titleTextStyle: TextStyle(
-        fontSize: 18,
-        fontWeight: .w500,
-        color: black
-      )
+      titleTextStyle: TextStyle(fontSize: 18, fontWeight: .w500, color: black),
     ),
     listTileTheme: ListTileThemeData(
       tileColor: white,
@@ -81,8 +79,8 @@ class AppTheme {
         textStyle: TextStyle(
           fontSize: 14,
           fontWeight: .w400,
-          decoration: .underline, 
-          ),
+          decoration: .underline,
+        ),
       ),
     ),
     textTheme: TextTheme(
@@ -96,5 +94,82 @@ class AppTheme {
       titleSmall: TextStyle(fontSize: 14, fontWeight: .w400, color: darkGrey),
     ),
   );
-  static ThemeData darkTheme = ThemeData();
+  static ThemeData darkTheme = ThemeData(
+    primaryColor: primaryDark,
+    scaffoldBackgroundColor: backgroundDark,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: backgroundDark,
+      selectedItemColor: primaryDark,
+      unselectedItemColor: darkGrey,
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: primaryDark,
+      foregroundColor: white,
+      shape: CircleBorder(),
+    ),
+    inputDecorationTheme: InputDecorationThemeData(
+      filled: true,
+      fillColor: navy,
+      hintStyle: TextStyle(fontSize: 14,
+      fontWeight: .w400, color: darkGrey),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: offWhite),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: offWhite),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: red),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: red),
+      ),
+    ),
+    appBarTheme: AppBarThemeData(
+      backgroundColor: backgroundDark,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        fontSize: 18, fontWeight: .w500, color: white),
+    ),
+    listTileTheme: ListTileThemeData(
+      tileColor: navy,
+      minTileHeight: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadiusGeometry.circular(16),
+      ),
+      titleTextStyle: TextStyle(
+        fontSize: 16, fontWeight: .w500, color: white),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: primaryDark,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(16),
+          side: BorderSide(color: borderDark),
+        ),
+        foregroundColor: white,
+        textStyle: TextStyle(fontSize: 20, fontWeight: .w500),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: primaryDark,
+        textStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: .w400,
+          decoration: .underline,
+        ),
+      ),
+    ),
+    textTheme: TextTheme(
+      headlineSmall: TextStyle(fontSize: 24, fontWeight: .w600, color: white),
+      titleLarge: TextStyle(fontSize: 20, fontWeight: .w500, color: white),
+      titleMedium: TextStyle(fontSize: 16, fontWeight: .w500, color: white),
+      titleSmall: TextStyle(fontSize: 14, fontWeight: .w400, color: white),
+    ),
+  );
 }

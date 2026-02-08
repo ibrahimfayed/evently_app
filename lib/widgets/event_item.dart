@@ -1,6 +1,7 @@
 import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/models/event_model.dart';
 import 'package:evently_app/providers/events_provider.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -12,6 +13,7 @@ class EventItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     UserProvider userProvider = Provider.of<UserProvider>(context);
     EventsProvider eventsProvider = Provider.of<EventsProvider>(
       context,
@@ -36,8 +38,15 @@ class EventItem extends StatelessWidget {
           margin: EdgeInsets.all(8),
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppTheme.backgroundLight,
-            borderRadius: BorderRadius.circular(8),
+            color: settingsProvider.isDark
+                  ? AppTheme.backgroundDark
+                  : AppTheme.backgroundLight,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: settingsProvider.isDark
+                    ? AppTheme.borderDark
+                    : AppTheme.offWhite,
+              ),
           ),
           child: Text(
             DateFormat('d MMM').format(event.dateTime),
@@ -55,8 +64,15 @@ class EventItem extends StatelessWidget {
             //margin: EdgeInsets.symmetric(horizontal: 8),
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppTheme.backgroundLight,
+              color: settingsProvider.isDark
+                  ? AppTheme.backgroundDark
+                  : AppTheme.backgroundLight,
               borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: settingsProvider.isDark
+                    ? AppTheme.borderDark
+                    : AppTheme.offWhite,
+              ),
             ),
             child: Row(
               children: [
@@ -64,7 +80,9 @@ class EventItem extends StatelessWidget {
                   child: Text(
                     event.title,
                     style: textTheme.titleMedium!.copyWith(
-                      color: AppTheme.black,
+                      color: settingsProvider.isDark
+                          ? AppTheme.white
+                          : AppTheme.black,
                     ),
                   ),
                 ),

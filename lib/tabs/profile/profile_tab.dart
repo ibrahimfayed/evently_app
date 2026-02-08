@@ -3,9 +3,8 @@ import 'package:evently_app/auth/login_screen.dart';
 import 'package:evently_app/firebase_service.dart';
 import 'package:evently_app/models/language_model.dart';
 import 'package:evently_app/models/user_model.dart';
+import 'package:evently_app/providers/settings_provider.dart';
 import 'package:evently_app/providers/user_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +14,7 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     UserModel currentUser = Provider.of<UserProvider>(context).currentUser!;
     TextTheme textTheme = Theme.of(context).textTheme;
     return Padding(
@@ -33,8 +33,10 @@ class ProfileTab extends StatelessWidget {
           Text(currentUser.email, style: textTheme.titleSmall),
           SizedBox(height: 32),
           SwitchListTile(
-            value: false,
-            onChanged: (value) {},
+            value: settingsProvider.isDark,
+            onChanged: (isDark) {
+              settingsProvider.changeTheme(isDark ? .dark : .light);
+            },
             title: Text('Dark mode'),
             contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             activeTrackColor: Theme.of(context).primaryColor,
@@ -45,6 +47,7 @@ class ProfileTab extends StatelessWidget {
           SizedBox(height: 16),
           ListTile(
             title: Text('Language'),
+            contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             trailing: DropdownButton(
               value: 'en',
               items: LanguageModel.languages
