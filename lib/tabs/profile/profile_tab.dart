@@ -49,7 +49,7 @@ class ProfileTab extends StatelessWidget {
             title: Text('Language'),
             contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             trailing: DropdownButton(
-              value: 'en',
+              value: settingsProvider.languageCode,
               items: LanguageModel.languages
                   .map(
                     (language) => DropdownMenuItem(
@@ -58,7 +58,11 @@ class ProfileTab extends StatelessWidget {
                     ),
                   )
                   .toList(),
-              onChanged: (value) {},
+              onChanged: (languageCode) {
+                if (languageCode == null)return;
+                settingsProvider.changeLanguage(languageCode);
+
+              },
               dropdownColor: AppTheme.white,
               borderRadius: BorderRadius.circular(16),
               underline: SizedBox(),

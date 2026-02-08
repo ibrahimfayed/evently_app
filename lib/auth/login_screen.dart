@@ -1,6 +1,7 @@
 import 'package:evently_app/auth/register_screen.dart';
 import 'package:evently_app/firebase_service.dart';
 import 'package:evently_app/home_screen.dart';
+import 'package:evently_app/l10n/app_localizations.dart';
 import 'package:evently_app/providers/user_provider.dart';
 import 'package:evently_app/ui_utils.dart';
 import 'package:evently_app/widgets/default_elevated_button.dart';
@@ -25,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.sizeOf(context).height;
     TextTheme textTheme = Theme.of(context).textTheme;
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -71,19 +73,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   isPassword: true,
                 ),
                 SizedBox(height: screenHeight * 0.03),
-                DefaultElevatedButton(label: 'Login', onPressed: login),
+                DefaultElevatedButton(
+                  label: appLocalizations.login,
+                  onPressed: login,
+                ),
                 SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: .center,
                   children: [
-                    Text('Don’t have an account?', style: textTheme.titleSmall),
+                    Text(appLocalizations.doNotHaveAnAccount, style: textTheme.titleSmall),
                     TextButton(
                       onPressed: () {
                         Navigator.of(
                           context,
                         ).pushReplacementNamed(RegisterScreen.routeName);
                       },
-                      child: Text('Signup'),
+                      child: Text(appLocalizations.register),
                     ),
                   ],
                 ),
@@ -98,18 +103,23 @@ class _LoginScreenState extends State<LoginScreen> {
   void login() {
     if (formKey.currentState!.validate()) {
       FirebaseService.login(
-        email: emailController.text,
-        password: passwordController.text,
-      ).then((user) {
-        Provider.of<UserProvider>(context,listen: false).updateCurrentUser(user);
-        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-      }).catchError((error){
-        String? errorMessage;
-        if (error is FirebaseAuthException) {
-          errorMessage = error.message;         
-        }
-        UIUtils.showErrorMessage(errorMessage);
-      });
+            email: emailController.text,
+            password: passwordController.text,
+          )
+          .then((user) {
+            Provider.of<UserProvider>(
+              context,
+              listen: false,
+            ).updateCurrentUser(user);
+            Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+          })
+          .catchError((error) {
+            String? errorMessage;
+            if (error is FirebaseAuthException) {
+              errorMessage = error.message;
+            }
+            UIUtils.showErrorMessage(errorMessage);
+          });
     }
   }
 }
