@@ -1,4 +1,3 @@
-import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/home_screen.dart';
 import 'package:evently_app/onboarding/custom_indicator.dart';
 import 'package:evently_app/onboarding/first_screen.dart';

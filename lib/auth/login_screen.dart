@@ -1,3 +1,4 @@
+import 'package:evently_app/app_theme.dart';
 import 'package:evently_app/auth/register_screen.dart';
 import 'package:evently_app/firebase_service.dart';
 import 'package:evently_app/home_screen.dart';
@@ -21,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.sizeOf(context).height;
@@ -92,6 +93,32 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Divider(color: AppTheme.offWhite),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text('or', style: textTheme.titleSmall!.copyWith(
+                        color: AppTheme.primaryLight
+                      )),
+                    ),
+                    Expanded(
+                      child: Divider(color: AppTheme.offWhite),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15,),
+                DefaultElevatedButton(
+                  label: 'Login with Google',
+                  backgroundColor: AppTheme.white,
+                  textColor: AppTheme.primaryLight,
+                  imgpath: 'assets/images/google_img.png',
+                  onPressed: (){},
+                ),
+                
               ],
             ),
           ),
@@ -122,4 +149,6 @@ class _LoginScreenState extends State<LoginScreen> {
           });
     }
   }
+  
+
 }

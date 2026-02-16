@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SettingsProvider with ChangeNotifier {
   ThemeMode themeMode = .system;//here is the defult(.dark,.light,.system(according to device system))  ممكن أخليها أي حاجة عادي
   bool get isDark => themeMode == .dark;
-  String languageCode = 'ar';
+  String languageCode = 'en';
 
   void changeTheme(ThemeMode theme){
     themeMode = theme;
