@@ -4,10 +4,11 @@ import 'package:evently_app/models/event_model.dart';
 import 'package:flutter/material.dart';
 
 class EventsProvider with ChangeNotifier {
+  //data
   List<EventModel> allevents = [];
   List<EventModel> displayedEvents = [];
   List<EventModel> favoriteEvents = [];
-
+  //funs
   Future<void> getEvents() async {
     allevents = await FirebaseService.getEvents();
     displayedEvents = allevents;
